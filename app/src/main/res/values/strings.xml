@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fettle</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Recipes_Fragment">Recipes</string> />
+    <string name="Favourite_Recipes">Favourites</string> />
+    <string name="Meal_Planner">Meal Planner</string> />
+</resources>

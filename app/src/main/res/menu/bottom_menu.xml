@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/recipesFragment"
+        android:title="@string/Recipes_Fragment"
+        android:icon="@drawable/ic_menu_book"/>
+
+    <item android:id="@+id/faveRecipesFragment"
+        android:title="@string/Favourite_Recipes"
+        android:icon="@drawable/ic_star"/>
+
+    <item android:id="@+id/mealPlannerFragment"
+        android:title="@string/Meal_Planner"
+        android:icon="@drawable/ic_calendar"/>
+
+</menu>
