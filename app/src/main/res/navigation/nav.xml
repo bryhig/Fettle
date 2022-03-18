@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/recipesFragment"
-        android:name="com.example.fettle.RecipesFragment"
+        android:name="com.example.fettle.ui.fragments.recipes.RecipesFragment"
         android:label="Recipes"
         tools:layout="@layout/fragment_recipes" />
     <fragment
         android:id="@+id/faveRecipesFragment"
-        android:name="com.example.fettle.FaveRecipes"
+        android:name="com.example.fettle.ui.fragments.faves.FaveRecipes"
         android:label="Favourites"
         tools:layout="@layout/fragment_fave_recipes" />
     <fragment
         android:id="@+id/mealPlannerFragment"
-        android:name="com.example.fettle.MealPlanner"
+        android:name="com.example.fettle.ui.fragments.mealplanner.MealPlanner"
         android:label="Meal Planner"
         tools:layout="@layout/fragment_meal_planner" />
 </navigation>
