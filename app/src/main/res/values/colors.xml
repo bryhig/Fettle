@@ -20,4 +20,6 @@
     <color name="yellow">#FFC114</color>
     <color name="green">#00C980</color>
     <color name="fettlePurple">#785EF0</color>
+    <color name="fettleOrange">#F0b35e</color>
+    <color name="fettleOrange2">#F08F5E</color>
 </resources>

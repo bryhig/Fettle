@@ -4,17 +4,17 @@ import com.example.fettle.remotedata.RecipesAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 import com.example.fettle.Global.Companion.API_URL
+import dagger.hilt.components.SingletonComponent
 import java.util.concurrent.TimeUnit
 
 @Module
-@InstallIn(ApplicationComponent::class)
-object NetworkModule {
+@InstallIn(SingletonComponent::class)
+object Networking {
     @Singleton
     @Provides
     fun supplyHTTP() : OkHttpClient{

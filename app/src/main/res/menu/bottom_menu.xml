@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/recipesFragment"
         android:title="@string/Recipes_Fragment"
-        android:icon="@drawable/ic_menu_book"/>
+        android:icon="@drawable/ic_recipe_alternative"/>
 
     <item android:id="@+id/faveRecipesFragment"
         android:title="@string/Favourite_Recipes"
