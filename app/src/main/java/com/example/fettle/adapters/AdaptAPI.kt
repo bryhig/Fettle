@@ -9,7 +9,7 @@ import com.example.fettle.databinding.RecipesRowLayoutBinding
 import com.example.fettle.modelClasses.FoodRecipe
 import com.example.fettle.modelClasses.Result
 
-class adaptAPI : RecyclerView.Adapter<adaptAPI.MyViewHolder>() {
+class AdaptAPI : RecyclerView.Adapter<AdaptAPI.MyViewHolder>() {
     private var recipes = emptyList<Result>()
     class MyViewHolder(private val binding : RecipesRowLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(result: Result){
@@ -37,7 +37,6 @@ class adaptAPI : RecyclerView.Adapter<adaptAPI.MyViewHolder>() {
     override fun getItemCount(): Int {
         return recipes.size
     }
-
 
     fun setData(newData : FoodRecipe){
         val recipesDiffUtil = RecipesDiffUtil(recipes, newData.results)

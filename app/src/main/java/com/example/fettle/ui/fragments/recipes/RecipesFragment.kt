@@ -7,35 +7,64 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fettle.MainViewModel
+import com.example.fettle.viewmodels.MainViewModel
 import com.example.fettle.R
-import com.example.fettle.adapters.adaptAPI
-import com.example.fettle.Global.Companion.API_KEY
+import com.example.fettle.adapters.AdaptAPI
 import com.example.fettle.NetworkStatus
+import com.example.fettle.databinding.FragmentRecipesBinding
+import com.example.fettle.observeOnce
+import com.example.fettle.viewmodels.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_recipes.view.*
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
+    private var _binding : FragmentRecipesBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var mainViewModel : MainViewModel
-    private val globalAdapter by lazy { adaptAPI() }
-    private lateinit var globalView : View
+    private lateinit var recipeViewModel : RecipeViewModel
+    private val globalAdapter by lazy { AdaptAPI() }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        recipeViewModel = ViewModelProvider(requireActivity()).get(RecipeViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        globalView = inflater.inflate(R.layout.fragment_recipes, container, false)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
         startRecycleView()
-        getData()
+        readLocalData()
 
-        return globalView
+        return binding.root
     }
+
+    private fun readLocalData() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
+                if (database.isNotEmpty()) {
+                    globalAdapter.setData(database[0].recipe)
+                    noShimmer()
+                }
+                else{
+                    getData()
+                }
+            }
+        }
+    }
+
     private fun getData() {
-        mainViewModel.get(getQueries())
+        mainViewModel.get(recipeViewModel.getQueries())
         mainViewModel.APIresponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkStatus.Success -> {
@@ -44,6 +73,7 @@ class RecipesFragment : Fragment() {
                 }
                 is NetworkStatus.Error -> {
                     noShimmer()
+                    getCache()
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
@@ -56,25 +86,30 @@ class RecipesFragment : Fragment() {
             }
         }
     }
-    private fun getQueries() : HashMap<String, String>{
-        val queries : HashMap<String, String> = HashMap()
-        queries["number"] = "50"
-        queries["apiKey"] = API_KEY
-        queries["type"] = "snack"
-        queries["diet"] = "vegan"
-        queries["addRecipeInformation"] = "true"
-        queries["fillIngredients"] = "true"
-        return queries
+    private fun getCache(){
+       lifecycleScope.launch{
+           mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+               if (database.isNotEmpty()) {
+                   globalAdapter.setData(database[0].recipe)
+               }
+           }
+       }
     }
     private fun startRecycleView(){
-        globalView.recycler_view.adapter = globalAdapter
-        globalView.recycler_view.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = globalAdapter
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         shimmer()
     }
     private fun shimmer(){
-        globalView.recycler_view.showShimmer()
+        binding.recyclerview.showShimmer()
     }
     private fun noShimmer(){
-        globalView.recycler_view.hideShimmer()
+        binding.recyclerview.hideShimmer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
+

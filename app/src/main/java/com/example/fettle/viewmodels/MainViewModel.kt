@@ -1,16 +1,16 @@
-package com.example.fettle
+package com.example.fettle.viewmodels
 
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.fettle.NetworkStatus
 import com.example.fettle.modelClasses.FoodRecipe
 import com.example.fettle.remotedata.Repository
+import com.example.fettle.roomdatabase.Entity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
@@ -18,10 +18,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val Repository: Repository,
+    private val repository: Repository,
     application: Application
 ) : AndroidViewModel(application) {
+    //ROOM LOCAL DATA
+    var readRecipes: LiveData<List<Entity>> = repository.local.readData().asLiveData()
 
+    private fun writeRecipes(entity: Entity) = viewModelScope.launch(Dispatchers.IO) {
+        repository.local.writeData(entity)
+
+    }
+
+
+    //RETROFIT REMOTE DATA
     var APIresponse: MutableLiveData<NetworkStatus<FoodRecipe>> = MutableLiveData()
 
     fun get(queries: Map<String, String>) = viewModelScope.launch {
@@ -32,10 +41,14 @@ class MainViewModel @Inject constructor(
         APIresponse.value = NetworkStatus.Loading()
         if (internet()) {
             try {
-                val response = Repository.remote.getRecipes(queries)
+                val response = repository.remote.getRecipes(queries)
                 APIresponse.value = handleResponse(response)
+                val recipes = APIresponse.value!!.data
+                if(recipes != null){
+                    cache(recipes)
+                }
             } catch (error: Exception) {
-                APIresponse.value = NetworkStatus.Error("NO RECIPE FOUND")
+                APIresponse.value = NetworkStatus.Error("NO INTERNET CONNECTION")
             }
 
         } else {
@@ -43,7 +56,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response: Response<FoodRecipe>): NetworkStatus<FoodRecipe>? {
+    private fun cache(recipes: FoodRecipe) {
+        val entity = Entity(recipes)
+        writeRecipes(entity)
+    }
+
+    private fun handleResponse(response: Response<FoodRecipe>): NetworkStatus<FoodRecipe> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkStatus.Error("Timeout")
