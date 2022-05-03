@@ -2,15 +2,21 @@
     <!-- Base application theme. -->
     <style name="Theme.Fettle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/fettlePurple</item>
-        <item name="colorPrimaryVariant">@color/fettlePurple</item>
+        <item name="colorPrimary">@color/fettleGreen</item>
+        <item name="colorPrimaryVariant">@color/fettleGreen</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/fettleOrange</item>
-        <item name="colorSecondaryVariant">@color/fettleOrange2</item>
+        <item name="colorSecondary">@color/fettlePurple</item>
+        <item name="colorSecondaryVariant">@color/fettlePink2</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+    
+    <style name="chipStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_colours</item>
+        <item name="android:textColor">@color/chip_text_colours</item>
+        <item name="checkedIconTint">@color/chip_text_colours</item>
     </style>
 </resources>

@@ -6,7 +6,11 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteData @Inject constructor(private val recipesAPI: RecipesAPI) {
-    suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipe>{
+    suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipe> {
         return recipesAPI.get(queries)
+    }
+
+    suspend fun searchRecipe(search: Map<String, String>): Response<FoodRecipe> {
+        return recipesAPI.searchRecipes(search)
     }
 }

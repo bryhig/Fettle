@@ -21,6 +21,7 @@ class MainViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
 ) : AndroidViewModel(application) {
+
     //ROOM LOCAL DATA
     var readRecipes: LiveData<List<Entity>> = repository.local.readData().asLiveData()
 
@@ -32,9 +33,28 @@ class MainViewModel @Inject constructor(
 
     //RETROFIT REMOTE DATA
     var APIresponse: MutableLiveData<NetworkStatus<FoodRecipe>> = MutableLiveData()
+    var searchResponse: MutableLiveData<NetworkStatus<FoodRecipe>> = MutableLiveData()
 
     fun get(queries: Map<String, String>) = viewModelScope.launch {
         getSafe(queries)
+    }
+    fun searchRecipe(search : Map<String, String>) = viewModelScope.launch {
+        searchRecipeSafeCall(search)
+    }
+
+    private suspend fun searchRecipeSafeCall(search: Map<String, String>) {
+        searchResponse.value = NetworkStatus.Loading()
+        if (internet()) {
+            try {
+                val response = repository.remote.searchRecipe(search)
+                searchResponse.value = handleResponse(response)
+            } catch (error: Exception) {
+                searchResponse.value = NetworkStatus.Error("NO INTERNET CONNECTION")
+            }
+
+        } else {
+            searchResponse.value = NetworkStatus.Error("INTERNET CONNECTION UNAVAILABLE")
+        }
     }
 
     private suspend fun getSafe(queries: Map<String, String>) {

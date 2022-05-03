@@ -9,7 +9,15 @@
         android:id="@+id/recipesFragment"
         android:name="com.example.fettle.ui.fragments.recipes.RecipesFragment"
         android:label="Recipes"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+        <argument
+            android:name="backFromBottom"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
     <fragment
         android:id="@+id/faveRecipesFragment"
         android:name="com.example.fettle.ui.fragments.faves.FaveRecipes"
@@ -20,4 +28,13 @@
         android:name="com.example.fettle.ui.fragments.mealplanner.MealPlanner"
         android:label="Meal Planner"
         tools:layout="@layout/fragment_meal_planner" />
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.example.fettle.ui.fragments.recipes.BottomSheet"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <action
+            android:id="@+id/action_bottomSheet_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
+    </dialog>
 </navigation>
