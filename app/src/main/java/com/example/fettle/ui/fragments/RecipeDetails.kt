@@ -12,6 +12,7 @@ import com.example.fettle.modelClasses.ExtendedIngredient
 import com.example.fettle.modelClasses.Result
 import com.example.fettle.ui.RecipeDetailsActivity
 import kotlinx.android.synthetic.main.fragment_recipe_details.view.*
+import org.jsoup.Jsoup
 
 class RecipeDetails : Fragment() {
     override fun onCreateView(
@@ -22,13 +23,17 @@ class RecipeDetails : Fragment() {
         val view = inflater.inflate(R.layout.fragment_recipe_details, container, false)
         val args = arguments
         val myBundle : Result? = args?.getParcelable("recipeBundle")
+        val mins = "Ready in " + myBundle?.readyInMinutes.toString() + " mins"
         view.imageViewDetails.load(myBundle?.image)
         view.textViewTitleDetails.text = myBundle?.title
-        val mins = "Ready in " + myBundle?.readyInMinutes.toString() + " mins"
-        view.textViewMinsDetails.text = mins
-        view.textViewOverview.text = myBundle?.summary
-
+        view.textViewReadyInMins.text = mins
+        //Get rid of HTML tags which appear from some spoonacular recipes.
+        view.textViewOverview.text = html2text(myBundle?.summary.toString())
+        view.textViewURL.text = myBundle?.sourceUrl.toString()
 
         return view
+    }
+    private fun html2text(input: String) : String{
+        return Jsoup.parse(input).text()
     }
 }

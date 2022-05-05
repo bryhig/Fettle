@@ -32,7 +32,7 @@ data class Result(
     @SerializedName("sourceName")
     val sourceName: String?,
     @SerializedName("sourceUrl")
-    val sourceUrl: String?,
+    val sourceUrl: String,
     @SerializedName("spoonacularSourceUrl")
     val spoonacularSourceUrl: String?,
     @SerializedName("summary")

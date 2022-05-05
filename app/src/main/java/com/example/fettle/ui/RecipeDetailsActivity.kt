@@ -8,7 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.fettle.R
 import com.example.fettle.adapters.DetailsAdapter
+import com.example.fettle.databinding.FragmentRecipeDetailsBindingImpl
+import com.example.fettle.modelClasses.Result
+import com.example.fettle.ui.fragments.RecipeDetails
 import kotlinx.android.synthetic.main.activity_recipe_details.*
+
 
 class RecipeDetailsActivity : AppCompatActivity() {
     private val args by navArgs<RecipeDetailsActivityArgs>()
@@ -19,13 +23,10 @@ class RecipeDetailsActivity : AppCompatActivity() {
         val response = args.result
         val resultBundle = Bundle()
         resultBundle.putParcelable("recipeBundle", response)
-        println(response.title)
+        val frag = RecipeDetails()
+        frag.arguments = resultBundle
+        supportFragmentManager.beginTransaction().add(R.id.recipeDetails, frag).commit()
+
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if(item.itemId == android.R.id.home){
-//            finish()
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 }

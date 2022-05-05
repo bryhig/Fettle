@@ -27,5 +27,6 @@
     <string name="filter">Filter</string>
     <string name="search" />
     <string name="recipe_image">RecipeImage</string>
+    <string name="find_the_full_recipe_from_the_link_below">Find the full recipe from the link below:</string>
     />
 </resources>
