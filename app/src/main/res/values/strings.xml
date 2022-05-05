@@ -26,5 +26,6 @@
     <string name="pescetarian">Pescetarian</string>
     <string name="filter">Filter</string>
     <string name="search" />
+    <string name="recipe_image">RecipeImage</string>
     />
 </resources>
