@@ -1,15 +1,35 @@
 package com.example.fettle.adapters
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import com.example.fettle.NetworkStatus
 import com.example.fettle.modelClasses.FoodRecipe
+import com.example.fettle.modelClasses.Result
 import com.example.fettle.roomdatabase.Entity
+import com.example.fettle.ui.fragments.recipes.RecipesFragmentDirections
 
 class RecipesBinding {
     companion object{
+
+        //Send api data from recipes fragment into the recipes details activity.
+        @BindingAdapter("onRecipeClickListener")
+        @JvmStatic
+        fun onRecipeClickListener(recipesRowLayout : ConstraintLayout, result : Result){
+            recipesRowLayout.setOnClickListener {
+                try{
+                    val action = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsActivity(result)
+                    recipesRowLayout.findNavController().navigate(action)
+                }catch(e: Exception){
+                    Log.d("onRecipeClickListener", e.toString())
+                }
+            }
+
+        }
         @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
         @JvmStatic
         fun errorImageViewVisibility(imageView: ImageView, response : NetworkStatus<FoodRecipe>?, database : List<Entity>?){
