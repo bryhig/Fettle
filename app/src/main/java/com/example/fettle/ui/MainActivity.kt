@@ -18,8 +18,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        //Set up navigation controller to navigate between fragments.
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
+        //Set out order of fragments in bottom navigation bar.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.recipesFragment,
@@ -27,11 +30,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.mealPlannerFragment
             )
         )
+        //Apply naviagation controller with the defined app bar confifuragtion.
         bottomNavigationView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
     }
 
+    //Override needed for nav bar to work.
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

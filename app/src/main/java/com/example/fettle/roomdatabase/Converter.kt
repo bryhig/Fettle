@@ -5,15 +5,19 @@ import com.example.fettle.modelClasses.FoodRecipe
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class TypeConverter {
+class Converter {
     var gson = Gson()
+
     @TypeConverter
-    fun recipeToString(recipe : FoodRecipe) : String{
+    //Convert FoodRecipe instance back into JSON to be stored in database.
+    fun recipeToJson(recipe: FoodRecipe): String {
         return gson.toJson(recipe)
     }
+
     @TypeConverter
-    fun toRecipe(data : String) : FoodRecipe{
-        val listType = object : TypeToken<FoodRecipe>(){}.type
+    //Convert JSON format stored in database to instance of FoodRecipe class.
+    fun toRecipe(data: String): FoodRecipe {
+        val listType = object : TypeToken<FoodRecipe>() {}.type
         return gson.fromJson(data, listType)
     }
 }

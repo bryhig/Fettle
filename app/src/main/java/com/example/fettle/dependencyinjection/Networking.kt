@@ -14,23 +14,34 @@ import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)
+//General networking functions.
 object Networking {
     @Singleton
     @Provides
-    fun supplyHTTP() : OkHttpClient{
-        return OkHttpClient.Builder().readTimeout(10, TimeUnit.SECONDS,).connectTimeout(10, TimeUnit.SECONDS).build()
+    //Supply HTTP client to application.
+    fun supplyHTTP(): OkHttpClient {
+        return OkHttpClient.Builder().readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS).build()
     }
+
     @Singleton
     @Provides
-    fun supplyConverterFactory(): GsonConverterFactory{
+    //GSON converter. Used to parse API response into object.
+    fun supplyConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
+
     @Singleton
     @Provides
+    //Supply retrofit REST client to interact with API.
     fun supplyRetrofit(
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
-    ): Retrofit{return Retrofit.Builder().baseUrl(API_URL).client(okHttpClient).addConverterFactory(gsonConverterFactory).build()}
+    ): Retrofit {
+        return Retrofit.Builder().baseUrl(API_URL).client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory).build()
+    }
+
     @Singleton
     @Provides
     fun supplyAPI(retrofit: Retrofit): RecipesAPI {

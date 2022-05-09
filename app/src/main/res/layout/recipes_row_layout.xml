@@ -7,149 +7,131 @@
         <variable
             name="response"
             type="com.example.fettle.modelClasses.Result" />
-
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/recipesRowLayout"
-        onRecipeClickListener="@{response}"
-        android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/recipesRowLayout"
+    onRecipeClickListener="@{response}"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/row_cardView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp">
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/lightMediumGray"
+        app:strokeWidth="1dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/row_cardView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/lightMediumGray"
-            app:strokeWidth="1dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
+            <ImageView
+                android:id="@+id/recipeImageView"
+                loadImage="@{response.image}"
+                android:layout_width="200dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/recipe_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
-                <ImageView
-                    android:id="@+id/recipeImageView"
-                    android:layout_width="200dp"
-                    android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    loadImage="@{response.image}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars"
-                    android:contentDescription="@string/recipe_image" />
+            <TextView
+                android:id="@+id/title_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/montserrat_alternates"
+                android:maxLines="2"
+                android:text="@{response.title}"
+                android:textColor="@color/darker"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/recipeImageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/description_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/montserrat_alternates"
+                android:maxLines="5"
+                android:text="@{response.summary}"
+                android:textColor="@color/darkGray"
+                app:layout_constraintEnd_toEndOf="@+id/title_textView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/title_textView"
+                app:layout_constraintTop_toBottomOf="@+id/title_textView" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/description_textView"
+                app:layout_constraintStart_toStartOf="@+id/description_textView"
+                app:layout_constraintTop_toBottomOf="@+id/description_textView">
 
                 <TextView
-                    android:id="@+id/title_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/montserrat_alternates"
-                    android:maxLines="2"
-                    android:text="@{response.title}"
-                    android:textColor="@color/darker"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/recipeImageView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/description_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/montserrat_alternates"
-                    android:maxLines="3"
-                    android:text="@{response.summary}"
-                    android:textColor="@color/darkGray"
-                    app:layout_constraintEnd_toEndOf="@+id/title_textView"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/title_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/title_textView" />
-
-                <ImageView
-                    android:id="@+id/like_imageView"
+                    android:id="@+id/textViewReadyIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="36dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/like_textView"
-                    app:layout_constraintStart_toStartOf="@+id/like_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/description_textView"
-                    app:srcCompat="@drawable/ic_like"
-                    app:tint="@color/red" />
-
-                <TextView
-                    android:id="@+id/like_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(response.aggregateLikes)}"
-                    android:textColor="@color/red"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:text="@string/ready_in"
+                    android:layout_marginEnd="4dp"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toStartOf="@+id/description_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/like_imageView" />
-
-                <ImageView
-                    android:id="@+id/time_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:tint="@color/yellow"
-                    app:layout_constraintEnd_toEndOf="@+id/time_textView"
-                    app:layout_constraintHorizontal_bias="0.323"
-                    app:layout_constraintStart_toStartOf="@+id/time_textView"
-                    app:layout_constraintTop_toTopOf="@+id/like_imageView"
-                    app:srcCompat="@drawable/ic_timer" />
+                    android:textColor="@color/darker"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/time_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="@font/montserrat_alternates"
                     android:text="@{String.valueOf(response.readyInMinutes)}"
                     android:textAlignment="center"
-                    android:textColor="@color/yellow"
-                    app:layout_constraintStart_toEndOf="@+id/like_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/time_imageView" />
-
-                <ImageView
-                    android:id="@+id/vegan_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    vegan="@{response.vegan}"
-                    app:tint="@color/green"
-                    app:layout_constraintEnd_toEndOf="@+id/vegan_textView"
-                    app:layout_constraintStart_toStartOf="@+id/vegan_textView"
-                    app:layout_constraintTop_toTopOf="@+id/time_imageView"
-                    app:srcCompat="@drawable/ic_vegan" />
+                    android:textColor="@color/darker"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/vegan_textView"
+                    android:id="@+id/textViewMins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    vegan="@{response.vegan}"
-                    android:text="Vegan"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:text="@string/mins"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toEndOf="@+id/time_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/vegan_imageView" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:textColor="@color/darker"
+                    android:textStyle="bold" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

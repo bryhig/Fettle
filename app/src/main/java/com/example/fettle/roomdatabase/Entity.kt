@@ -6,9 +6,10 @@ import com.example.fettle.Global.Companion.TABLE
 import com.example.fettle.modelClasses.FoodRecipe
 
 @Entity(tableName = TABLE)
+//Defines an entity within the ROOM database. Entity contains an instance of FoodRecipe.
 class Entity(
-    var recipe : FoodRecipe
-){
+    var recipe: FoodRecipe
+) {
     @PrimaryKey(autoGenerate = false)
-    var id : Int = 0
+    var id: Int = 0
 }

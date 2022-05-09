@@ -16,6 +16,7 @@ private val Context.dataStore by preferencesDataStore("fettle_preferences")
 
 @ActivityRetainedScoped
 class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) {
+
     private object PreferenceKeys {
         val selectedDishType = stringPreferencesKey("dishType")
         val selectedDishTypeID = intPreferencesKey("dishTypeID")
@@ -23,19 +24,23 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         val selectedDietTypeID = intPreferencesKey("dietTypeID")
     }
 
-    private val dataStore : DataStore<Preferences> = context.dataStore
+    private val dataStore: DataStore<Preferences> = context.dataStore
 
-    suspend fun saveTypes(dishType : String, dishTypeID : Int, dietType: String, dietTypeID : Int){
+    suspend fun saveTypes(dishType: String, dishTypeID: Int, dietType: String, dietTypeID: Int) {
         dataStore.edit { preferences -> preferences[PreferenceKeys.selectedDishType] = dishType }
-        dataStore.edit { preferences -> preferences[PreferenceKeys.selectedDishTypeID]= dishTypeID}
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.selectedDishTypeID] = dishTypeID
+        }
         dataStore.edit { preferences -> preferences[PreferenceKeys.selectedDietType] = dietType }
-        dataStore.edit { preferences -> preferences[PreferenceKeys.selectedDietTypeID] = dietTypeID }
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.selectedDietTypeID] = dietTypeID
+        }
     }
 
-    val readTypes : Flow<DishAndDietType> = dataStore.data.catch {exception ->
-        if (exception is IOException){
+    val readTypes: Flow<DishAndDietType> = dataStore.data.catch { exception ->
+        if (exception is IOException) {
             emit(emptyPreferences())
-        }else{
+        } else {
             throw exception
         }
     }.map { preferences ->
@@ -43,14 +48,14 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         val selectedDishTypeID = preferences[PreferenceKeys.selectedDishTypeID] ?: 0
         val selectedDietType = preferences[PreferenceKeys.selectedDietType] ?: "gluten free"
         val selectedDietTypeID = preferences[PreferenceKeys.selectedDietTypeID] ?: 0
-        DishAndDietType(selectedDishType,selectedDishTypeID,selectedDietType,selectedDietTypeID)
+        DishAndDietType(selectedDishType, selectedDishTypeID, selectedDietType, selectedDietTypeID)
     }
 }
 
 data class DishAndDietType(
-    val selectedDishType : String,
-    val selectedDishID : Int,
-    val selectedDietType : String,
-    val selectedDietID : Int
+    val selectedDishType: String,
+    val selectedDishID: Int,
+    val selectedDietType: String,
+    val selectedDietID: Int
 
 )

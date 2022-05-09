@@ -11,13 +11,16 @@ import com.example.fettle.modelClasses.Result
 
 class AdaptAPI : RecyclerView.Adapter<AdaptAPI.MyViewHolder>() {
     private var recipes = emptyList<Result>()
-    class MyViewHolder(private val binding : RecipesRowLayoutBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(result: Result){
+
+    class MyViewHolder(private val binding: RecipesRowLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(result: Result) {
             binding.response = result
             binding.executePendingBindings()
         }
-        companion object{
-            fun from(parent: ViewGroup) : MyViewHolder{
+
+        companion object {
+            fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecipesRowLayoutBinding.inflate(layoutInflater, parent, false)
                 return MyViewHolder(binding)
@@ -38,7 +41,7 @@ class AdaptAPI : RecyclerView.Adapter<AdaptAPI.MyViewHolder>() {
         return recipes.size
     }
 
-    fun setData(newData : FoodRecipe){
+    fun setData(newData: FoodRecipe) {
         val recipesDiffUtil = RecipesDiffUtil(recipes, newData.results)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
         recipes = newData.results

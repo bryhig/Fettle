@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 //[accessed 24 March 2022].
 
 //Stops both reading data from both local cache and requesting more from spoonacular happening at the same time.
-fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>){
+fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
     observe(lifecycleOwner, object : Observer<T> {
         override fun onChanged(t: T?) {
             removeObserver(this)

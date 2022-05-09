@@ -3,7 +3,8 @@ package com.example.fettle
 import androidx.recyclerview.widget.DiffUtil
 import com.example.fettle.modelClasses.Result
 
-class RecipesDiffUtil(private val oldList : List<Result>, private val newList : List<Result>) :
+//Used to check if recipes are different or same as before.
+class RecipesDiffUtil(private val oldList: List<Result>, private val newList: List<Result>) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

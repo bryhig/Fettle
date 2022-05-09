@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">Fettle</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="Recipes_Fragment">Recipes</string>
     />
     <string name="Favourite_Recipes">Favourites</string>
     />
     <string name="Meal_Planner">Meal Planner</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="meal_type">Meal Type</string>
     <string name="main_course">Main Course</string>
     <string name="starter">Starter</string>
@@ -27,6 +24,8 @@
     <string name="filter">Filter</string>
     <string name="search" />
     <string name="recipe_image">RecipeImage</string>
-    <string name="find_the_full_recipe_from_the_link_below">Find the full recipe from the link below:</string>
+    <string name="ready_in">Ready in</string>
+    <string name="mins">mins</string>
+    <string name="access_the_full_recipe">Access the full recipe:</string>
     />
 </resources>

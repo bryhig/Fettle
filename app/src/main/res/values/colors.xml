@@ -8,12 +8,11 @@
     <color name="dark">#313C44</color>
     <color name="darker">#151B20</color>
     <color name="black">#000000</color>
-    <color name="red">#FF4646</color>
-    <color name="yellow">#FFC114</color>
-    <color name="green">#00C980</color>
+
     <color name="fettleGreen">#5CB25D</color>
     <color name="fettlePurple">#B25CB1</color>
     <color name="fettlePink2">#B25CB1</color>
+
     <color name="checkChip">#205CB25D</color>
     <color name="chip">@color/lightGray</color>
     <color name="checkChipText">@color/fettleGreen</color>

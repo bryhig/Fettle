@@ -13,12 +13,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
+//Create a database to store data locally.
 object RoomDatabase {
     @Singleton
     @Provides
     fun supplyDatabase(
-        @ApplicationContext context : Context
-    )= Room.databaseBuilder(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
         context,
         Database::class.java,
         NAME
@@ -26,6 +27,7 @@ object RoomDatabase {
 
     @Singleton
     @Provides
+    //Create a data access object to access the data.
     fun supplyDAO(database: Database) = database.DAO()
 
 }

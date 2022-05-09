@@ -29,20 +29,22 @@ class RecipeViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : AndroidViewModel(application) {
 
+    //Used by default
     private var meal = "main course"
     private var diet = "gluten free"
 
     val readTypes = dataStoreRepository.readTypes
-    fun saveTypes(meal : String, id : Int, diet : String, dietID : Int) =
-        viewModelScope.launch(Dispatchers.IO){
+
+    fun saveTypes(meal: String, id: Int, diet: String, dietID: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.saveTypes(meal, id, diet, dietID)
         }
 
-
+    //Set up queries with all appropriate information.
     fun getQueries(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
 
-        viewModelScope.launch{
+        viewModelScope.launch {
             readTypes.collect { value ->
                 meal = value.selectedDishType
                 diet = value.selectedDietType
@@ -57,7 +59,8 @@ class RecipeViewModel @Inject constructor(
         return queries
     }
 
-    fun applySearchQuery(search : String) : HashMap<String, String>{
+    //Used for the searchbar functionality.
+    fun applySearchQuery(search: String): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
         queries[QUERY_SEARCH] = search
         queries[QUERY_NUMBER] = DEFAULT_NUMBER

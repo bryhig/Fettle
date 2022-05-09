@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/recipeDetails"
-        android:name="com.example.fettle.ui.fragments.RecipeDetails"
+        android:name="com.example.fettle.ui.fragments.recipes.RecipeDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

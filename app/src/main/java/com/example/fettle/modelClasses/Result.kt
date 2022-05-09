@@ -2,23 +2,15 @@ package com.example.fettle.modelClasses
 
 
 import android.os.Parcelable
-import com.example.fettle.modelClasses.ExtendedIngredient
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
 @Parcelize
+//The result class defines the attributes of a spoonacular recipe.
+//There are many more properties available, I've only kept the ones i use in the app here.
 data class Result(
-    @SerializedName("aggregateLikes")
-    val aggregateLikes: Int?,
-    @SerializedName("author")
-    val author: String?,
-    @SerializedName("cheap")
-    val cheap: Boolean?,
     @SerializedName("dairyFree")
     val dairyFree: Boolean?,
-    @SerializedName("extendedIngredients")
-    val extendedIngredients: @RawValue List<ExtendedIngredient>?,
     @SerializedName("glutenFree")
     val glutenFree: Boolean?,
     @SerializedName("id")
