@@ -26,6 +26,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
     private val dataStore: DataStore<Preferences> = context.dataStore
 
+    //Saves the types selected on the filter bottom sheet based on what the user has selected.
     suspend fun saveTypes(dishType: String, dishTypeID: Int, dietType: String, dietTypeID: Int) {
         dataStore.edit { preferences -> preferences[PreferenceKeys.selectedDishType] = dishType }
         dataStore.edit { preferences ->
@@ -52,10 +53,10 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     }
 }
 
+//Define dish and diet types class and its attributes
 data class DishAndDietType(
     val selectedDishType: String,
     val selectedDishID: Int,
     val selectedDietType: String,
     val selectedDietID: Int
-
 )

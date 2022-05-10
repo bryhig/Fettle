@@ -35,6 +35,8 @@ class RecipeViewModel @Inject constructor(
 
     val readTypes = dataStoreRepository.readTypes
 
+    //Used on the filter bottom sheet to save the types the user has selected.
+    //Calls function by same name in DataStoreRepository class
     fun saveTypes(meal: String, id: Int, diet: String, dietID: Int) =
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.saveTypes(meal, id, diet, dietID)

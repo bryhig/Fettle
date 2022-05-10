@@ -33,7 +33,7 @@ class BottomSheet : BottomSheetDialogFragment() {
     //Set up view model.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        recipeViewModel = ViewModelProvider(requireActivity()).get(RecipeViewModel::class.java)
+        recipeViewModel = ViewModelProvider(requireActivity())[RecipeViewModel::class.java]
     }
 
     override fun onCreateView(
