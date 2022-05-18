@@ -21,7 +21,7 @@ class AdaptAPI : RecyclerView.Adapter<AdaptAPI.MyViewHolder>() {
             binding.executePendingBindings()
         }
 
-        //Inflates the recipe row layout with the binding reacy for viewing.
+        //Inflates the recipe row layout with the binding ready for viewing.
         companion object {
             fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -35,6 +35,7 @@ class AdaptAPI : RecyclerView.Adapter<AdaptAPI.MyViewHolder>() {
         return MyViewHolder.from(parent)
     }
 
+    //Bind recipes to the view holder.
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val result = recipes[position]
         holder.bind(result)

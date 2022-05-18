@@ -5,7 +5,6 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -19,7 +18,6 @@ import com.example.fettle.databinding.FragmentRecipesBinding
 import com.example.fettle.observeOnce
 import com.example.fettle.viewmodels.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_recipes.view.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -32,7 +30,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipeViewModel: RecipeViewModel
-    //Set up adapter.
+    //Set up adapter using AdaptAPI class.
     private val globalAdapter by lazy { AdaptAPI() }
 
     //Set up view models.
@@ -91,6 +89,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
                 //If theres a network error, show a message to user.
                 is NetworkStatus.Error -> {
+                    //Stop shimmer effect and get data from local source.
                     noShimmer()
                     getCache()
                     Toast.makeText(

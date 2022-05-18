@@ -13,7 +13,7 @@ class APItoXML {
         @JvmStatic
         fun loadImage(imageView: ImageView, url: String) {
             imageView.load(url) {
-                crossfade(600)
+                crossfade(500)
             }
 
         }

@@ -27,5 +27,6 @@
     <string name="ready_in">Ready in</string>
     <string name="mins">mins</string>
     <string name="access_the_full_recipe">Access the full recipe:</string>
+    <string name="this_fragment_has_not_been_developed_yet_please_look_out_for_any_updates">This fragment has not been developed yet, please look out for any updates :)</string>
     />
 </resources>

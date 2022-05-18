@@ -4,6 +4,8 @@ package com.example.fettle
 class Global {
     companion object {
         //API key and URL
+
+        //IF API KEY EXPIRES OR DOESN'T WORK PLEASE CONTACT ME AND I CAN SUPPLY A NEW ONE
         const val API_KEY = "4c3a2719faa74767b6abb3438ac2351b"
         const val API_URL = "https://api.spoonacular.com"
 

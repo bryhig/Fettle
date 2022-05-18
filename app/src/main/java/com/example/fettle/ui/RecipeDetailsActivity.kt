@@ -21,7 +21,6 @@ class RecipeDetailsActivity : AppCompatActivity() {
         val frag = RecipeDetails()
         frag.arguments = resultBundle
         supportFragmentManager.beginTransaction().add(R.id.recipeDetails, frag).commit()
-
     }
 
 }

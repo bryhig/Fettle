@@ -15,7 +15,7 @@ class Converter {
     }
 
     @TypeConverter
-    //Convert JSON format stored in database to instance of FoodRecipe class.
+    //Convert JSON format stored in database to instance of FoodRecipe class to be displayed.
     fun toRecipe(data: String): FoodRecipe {
         val listType = object : TypeToken<FoodRecipe>() {}.type
         return gson.fromJson(data, listType)

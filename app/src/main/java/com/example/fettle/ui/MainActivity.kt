@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.mealPlannerFragment
             )
         )
-        //Apply naviagation controller with the defined app bar confifuragtion.
+        //Apply navigation controller with the defined app bar configuration.
         bottomNavigationView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
 

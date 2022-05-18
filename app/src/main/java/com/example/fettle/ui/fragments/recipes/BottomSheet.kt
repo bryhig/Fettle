@@ -19,6 +19,12 @@ import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.view.*
 import kotlin.Exception
 
+/*The following resource was used to help develop the filtering sheet,
+*
+* Андрей Нетяга (2020). Android material component: Filter and choice chips.
+* Medium. Available from https://medium.com/@werder630/material-filter-and-choice-chips-d929312148d8
+* [accessed 18 April 2022]. */
+
 //Sets up the bottom sheet to filter recipes in recipe fragment.
 class BottomSheet : BottomSheetDialogFragment() {
 
@@ -57,6 +63,7 @@ class BottomSheet : BottomSheetDialogFragment() {
             mealChipID = id
         }
         //Set diet type chip group
+        //setOnCheckedChangeListener for the chip group is deprecated but have no idea what to replace it with.
         mView.diet_ChipGroup.setOnCheckedChangeListener { group, id ->
             val chip = group.findViewById<Chip>(id)
             val type = chip.text.toString().lowercase()

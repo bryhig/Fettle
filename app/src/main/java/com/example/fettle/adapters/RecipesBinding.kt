@@ -23,6 +23,7 @@ class RecipesBinding {
         fun onRecipeClickListener(recipesRowLayout: ConstraintLayout, result: Result) {
             recipesRowLayout.setOnClickListener {
                 try {
+                    //Navigation action previously set up in nav.xml
                     val action =
                         RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsActivity(
                             result

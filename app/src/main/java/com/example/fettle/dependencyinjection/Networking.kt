@@ -11,6 +11,9 @@ import javax.inject.Singleton
 import com.example.fettle.Global.Companion.API_URL
 import dagger.hilt.components.SingletonComponent
 import java.util.concurrent.TimeUnit
+/* Google (2022) Dependency Injection with Hilt. Mountain View, USA: Google
+* Available from https://developer.android.com/training/dependency-injection/hilt-android
+* [accessed 15 March 2022]*/
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -33,7 +36,8 @@ object Networking {
 
     @Singleton
     @Provides
-    //Supply retrofit REST client to interact with API.
+    //Supply retrofit to allow the app to get dara fromm the spoonacular API.
+    //Gson converter factory used to convert gson response.
     fun supplyRetrofit(
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
